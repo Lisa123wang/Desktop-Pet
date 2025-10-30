@@ -1,0 +1,25 @@
+﻿<Window x:Class="DesktopPet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DesktopPet"
+        Width="200" Height="200"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        Topmost="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Grid MouseLeftButtonDown="Pet_Click">
+        <Image x:Name="PetImage"
+               Source="cat.gif"
+               Stretch="Uniform">
+            <Image.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Exit" Click="Exit_Click"/>
+                    <MenuItem Header="Start Auto Movement" Click="StartMovement_Click"/>
+                </ContextMenu>
+            </Image.ContextMenu>
+        </Image>
+    </Grid>
+</Window>
