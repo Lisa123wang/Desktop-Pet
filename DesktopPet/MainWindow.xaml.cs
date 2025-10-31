@@ -5,12 +5,11 @@
  * It implements the core functionality that makes the pet interactive and animated.
  * 
  * Key Features:
- * - Automatic horizontal movement across the screen bottom
- * - Boundary detection and bouncing off screen edges
- * - Drag-and-drop functionality for manual repositioning
- * - Timer-based animation loop for smooth movement
- * - Context menu event handlers for user controls
- * - Transparent window management without taskbar presence
+ * - Static desktop pet with animated GIF 
+ * - Drag functionality for manual repositioning anywhere on screen
+ * - Right-click context menu for user controls (Exit)
+ * - Transparent window that stays on top without taskbar presence
+ * - WpfAnimatedGif integration for proper GIF animation support
  */
 
 using System;
@@ -29,12 +28,12 @@ namespace DesktopPet
         #region Private Fields
         
         /// <summary>
-        /// Movement speed and direction. Positive = right, negative = left
+        /// Legacy field - no longer used since auto movement was removed
         /// </summary>
         private double dx = 2;
         
         /// <summary>
-        /// Timer that controls the pet's automatic movement animation
+        /// Legacy timer - no longer used since auto movement was removed  
         /// </summary>
         private DispatcherTimer timer;
         
@@ -49,7 +48,7 @@ namespace DesktopPet
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
-        /// Sets up the initial position, timer, and starts the pet's movement.
+        /// Sets up the initial position for the static desktop pet.
         /// </summary>
         public MainWindow()
         {
@@ -59,11 +58,11 @@ namespace DesktopPet
             Left = 100;
             Top = SystemParameters.PrimaryScreenHeight - Height - 50; // 50 pixels from bottom
 
-            // Timer configuration
+            // Timer configuration - DISABLED for static pet with GIF animation only
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(30); // 30ms = ~33 FPS for smooth animation
             timer.Tick += MovePet; // Subscribe to timer tick event
-            timer.Start(); // Begin automatic movement
+            // timer.Start(); // AUTO MOVEMENT DISABLED - pet stays in place
         }
 
         #endregion
@@ -84,8 +83,8 @@ namespace DesktopPet
                 // Move horizontally by dx pixels
                 Left += dx;
 
-                // Ensure pet stays at bottom of screen
-                Top = SystemParameters.PrimaryScreenHeight - Height - 50;
+                // Keep the current vertical position (don't force to bottom)
+                // Top = SystemParameters.PrimaryScreenHeight - Height - 50;
 
                 // Bounce off screen boundaries
                 if (Left + Width >= SystemParameters.PrimaryScreenWidth || Left <= 0)
@@ -100,8 +99,8 @@ namespace DesktopPet
         #region User Interaction
 
         /// <summary>
-        /// Handles mouse clicks on the pet for dragging functionality.
-        /// Allows the user to reposition the pet by clicking and dragging.
+        /// Handles mouse clicks on the pet for drag repositioning.
+        /// Allows the user to drag the pet to reposition it anywhere on screen.
         /// </summary>
         /// <param name="sender">The UI element that was clicked (Grid)</param>
         /// <param name="e">Mouse button event arguments</param>
@@ -113,28 +112,18 @@ namespace DesktopPet
                 this.DragMove(); // Use built-in drag functionality
                 isDragging = false;
                 
-                // Restart automatic movement after dragging
-                if (!timer.IsEnabled)
-                {
-                    timer.Start();
-                }
+                // DO NOT restart automatic movement after dragging
+                // User wants pet to stay where they place it
+                // if (!timer.IsEnabled)
+                // {
+                //     timer.Start();
+                // }
             }
         }
 
         #endregion
 
         #region Context Menu Event Handlers
-
-        /// <summary>
-        /// Context menu handler to start/restart the pet's automatic movement.
-        /// Called when user selects "Start Auto Movement" from right-click menu.
-        /// </summary>
-        /// <param name="sender">The menu item that was clicked</param>
-        /// <param name="e">Routed event arguments</param>
-        private void StartMovement_Click(object sender, RoutedEventArgs e)
-        {
-            timer.Start();
-        }
 
         /// <summary>
         /// Context menu handler to exit the application.
