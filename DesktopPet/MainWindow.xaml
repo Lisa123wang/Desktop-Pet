@@ -38,8 +38,11 @@
             <!-- Right-click context menu for pet controls -->
             <Image.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Open Log" Click="OpenLog_Click"/>
+                    <Separator/>
+                    <MenuItem Header="New Random Cat 🐱" Click="NewRandomCat_Click"/>
+                    <Separator/>
                     <MenuItem Header="Exit" Click="Exit_Click"/>
-                    <MenuItem Header="Start Auto Movement" Click="StartMovement_Click"/>
                 </ContextMenu>
             </Image.ContextMenu>
         </Image>
