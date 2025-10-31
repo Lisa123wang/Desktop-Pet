@@ -19,6 +19,7 @@
 <Window x:Class="DesktopPet.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
         Title="DesktopPet"
         Width="200" Height="200"
         WindowStyle="None"
@@ -30,9 +31,9 @@
 
     <!-- Main container grid that handles mouse clicks for dragging the pet -->
     <Grid MouseLeftButtonDown="Pet_Click">
-        <!-- Pet image that displays the cat.gif animation -->
+        <!-- Pet image that displays the cat.gif animation using WpfAnimatedGif library -->
         <Image x:Name="PetImage"
-               Source="cat.gif"
+               gif:ImageBehavior.AnimatedSource="cat.gif"
                Stretch="Uniform">
             <!-- Right-click context menu for pet controls -->
             <Image.ContextMenu>
