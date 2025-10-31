@@ -330,5 +330,27 @@ namespace DesktopPet
 
 
         #endregion
+
+        // Reload button in the UI (top-right). Use same behavior as context menu action.
+        private async void ReloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Prevent the click from bubbling to the Grid (which would start drag)
+                e.Handled = true;
+                await LoadRandomCatGifAsync();
+            }
+            catch (Exception ex)
+            {
+                App.LogError(ex, nameof(ReloadButton_Click));
+            }
+        }
+
+        // Exit button in the UI (top-left).
+        private void ExitTopButton_Click(object sender, RoutedEventArgs e)
+        {
+            try { e.Handled = true; } catch { /* ignore */ }
+            Exit_Click(sender, e);
+        }
     }
 }

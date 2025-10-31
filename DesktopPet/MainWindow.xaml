@@ -31,20 +31,72 @@
 
     <!-- Main container grid that handles mouse clicks for dragging the pet -->
     <Grid MouseLeftButtonDown="Pet_Click">
-        <!-- Pet image that displays the cat.gif animation using WpfAnimatedGif library -->
-        <Image x:Name="PetImage"
-               gif:ImageBehavior.AnimatedSource="cat.gif"
-               Stretch="Uniform">
-            <!-- Right-click context menu for pet controls -->
-            <Image.ContextMenu>
+        <!-- Rounded container that clips the image for rounded corners -->
+        <Border CornerRadius="16"
+                Background="#00FFFFFF"
+                ClipToBounds="True">
+            <Border.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Open Log" Click="OpenLog_Click"/>
-                    <Separator/>
                     <MenuItem Header="New Random Cat 🐱" Click="NewRandomCat_Click"/>
                     <Separator/>
                     <MenuItem Header="Exit" Click="Exit_Click"/>
                 </ContextMenu>
-            </Image.ContextMenu>
-        </Image>
+            </Border.ContextMenu>
+
+            <!-- Pet image that displays the cat.gif animation using WpfAnimatedGif library -->
+            <Image x:Name="PetImage"
+                   gif:ImageBehavior.AnimatedSource="cat.gif"
+                   Stretch="Uniform"/>
+        </Border>
+
+        <!-- Reload button in the top-right corner -->
+        <Button x:Name="ReloadButton"
+                Width="24" Height="24"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="4"
+                ToolTip="New Random Cat"
+                Click="ReloadButton_Click"
+                Background="#66000000"
+                BorderBrush="Transparent"
+                Foreground="White"
+                FontFamily="Segoe MDL2 Assets"
+                FontSize="14"
+                Content="&#xE72C;">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Exit button in the top-left corner -->
+        <Button x:Name="ExitButton"
+            Width="24" Height="24"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Margin="4"
+            ToolTip="Exit"
+            Click="ExitTopButton_Click"
+            Background="#66000000"
+            BorderBrush="Transparent"
+            Foreground="White"
+            FontFamily="Segoe MDL2 Assets"
+            FontSize="14"
+                Content="&#xE8BB;">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>
