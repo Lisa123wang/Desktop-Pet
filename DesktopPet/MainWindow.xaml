@@ -1,4 +1,22 @@
-﻿<Window x:Class="DesktopPet.MainWindow"
+﻿<!-- 
+  MainWindow.xaml - Desktop Pet UI Definition
+  
+  This file defines the visual appearance and layout of the desktop pet window.
+  
+  Key Window Properties:
+  - WindowStyle="None": Removes title bar and window border for a clean look
+  - AllowsTransparency="True": Enables transparent background
+  - Background="{x:Null}": Makes the window background completely transparent  
+  - Topmost="True": Keeps the pet on top of other windows
+  - ShowInTaskbar="False": Hides the window from the taskbar
+  - ResizeMode="NoResize": Prevents user from resizing the window
+  
+  UI Structure:
+  - Grid container with mouse click handling for drag functionality
+  - Image control to display the cat.gif pet animation
+  - Context menu with Exit and Start Movement options (right-click)
+-->
+<Window x:Class="DesktopPet.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="DesktopPet"
@@ -10,10 +28,13 @@
         ResizeMode="NoResize"
         ShowInTaskbar="False">
 
+    <!-- Main container grid that handles mouse clicks for dragging the pet -->
     <Grid MouseLeftButtonDown="Pet_Click">
+        <!-- Pet image that displays the cat.gif animation -->
         <Image x:Name="PetImage"
                Source="cat.gif"
                Stretch="Uniform">
+            <!-- Right-click context menu for pet controls -->
             <Image.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Exit" Click="Exit_Click"/>

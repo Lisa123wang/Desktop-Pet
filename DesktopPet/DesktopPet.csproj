@@ -1,4 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!-- 
+  DesktopPet Project Configuration
+  - Targets .NET 9 with Windows-specific features
+  - Enables WPF for creating the desktop pet UI
+  - Includes cat.gif as an embedded resource for the pet animation
+  - Configured as a Windows executable (no console window)
+-->
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
